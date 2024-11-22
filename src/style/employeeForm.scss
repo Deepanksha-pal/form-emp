@@ -1,0 +1,79 @@
+.employee-form{
+background-image: linear-gradient(to right, rgba(0, 0, 255, 0.053),rgba(128, 0, 128, 0.057));
+}
+
+.emp-heading{
+    text-align: center;
+    padding: 2rem;
+ 
+}
+.form-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    // border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+    .input-form {
+      margin-bottom: 15px;
+  
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+      }
+  
+      input,
+      select,
+      textarea {
+        width: 100%; // Ensure all fields have the same width
+        max-width: 100%; // Prevent overflow
+        padding: 10px;
+        font-size: 14px;
+        color: #555;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        transition: border-color 0.3s ease;
+  
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+        }
+      }
+  
+      textarea {
+        resize: vertical;
+      }
+  
+      input[type="file"] {
+        padding: 3px;
+      }
+    }
+  
+    button {
+      display: inline-block;
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+    //   background-color: #007bff;
+    background-image: linear-gradient(to right, rgba(0, 0, 255, 0.53),rgba(128, 0, 128, 0.57));
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        // background-color: #0056b3;
+        background-image: linear-gradient(to right,rgba(128, 0, 128, 0.47), rgba(0, 0, 255, 0.43));
+      }
+    }
+  }
+  

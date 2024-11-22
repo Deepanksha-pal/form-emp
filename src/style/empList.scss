@@ -1,0 +1,17 @@
+.emp-list{
+    width: 100%;
+    padding: 2px auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    
+
+    >.list-item{
+        width: 100%;
+      background-color: red;
+      padding: 1rem;
+      border: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+    }
+}
