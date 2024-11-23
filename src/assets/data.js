@@ -140,7 +140,7 @@ export  const empData=[
         "guardianName": "Anna Martinez",
         "relationship": "Sister",
         "guardianNumber": "6677889900",
-        "image": "path/to/image9.jpg",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqiZenuQQmqJBltmWA5g7ftw-VL3jp90yc6g&s",
         "idProof": "path/to/idProof9.jpg"
     },
     {

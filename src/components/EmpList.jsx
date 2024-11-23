@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { empData } from '../assets/data'
+import React from 'react';
 import "../style/empList.scss";
+import { useNavigate } from 'react-router-dom';
 
-const EmpList = () => {
-  const [employeeData ,setEmployeeData] = useState(empData)
+const EmpList = ({employeeData,setEmployeeData}) => {
+     const navigate = useNavigate()
   
 
     const handleView=(item)=>{
-       console.log(item)
+      navigate(`/employee/${item.id}`);
     }
 
     const handleDelete=(item)=>{
