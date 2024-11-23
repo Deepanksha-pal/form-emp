@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "../style/login.scss";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
     const [formData,setFormData] = useState({
         email:"",
         password:""
@@ -48,6 +48,7 @@ const Login = () => {
       } else {
         alert("Invalid email or password. Please try again.");
       }
+      setIsAuthenticated(true);
     };
 
     const handleChange=(e)=>{

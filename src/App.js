@@ -1,29 +1,52 @@
-
 import './App.css';
-// import EmployeeForm from './components/EmployeeForm';
 import Login from './pages/Login';
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AdminDashboard from './components/AdminDashboard';
 import { empData } from './assets/data';
 import { useState } from 'react';
 import ViewEmployee from './components/ViewEmployee';
 
+function ProtectedRoute({ isAuthenticated, children }) {
+  return isAuthenticated ? children : <Navigate to="/" />;
+}
+
 function App() {
-  const [employeeData ,setEmployeeData] = useState(empData)
+  const [employeeData, setEmployeeData] = useState(empData);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication
+
   return (
-  <>
-  {/* <EmployeeForm/> */}
-
-
-  <Router>
-
-    <Routes>
-      <Route path='/'  element={<Login/>}/>
-      <Route path='/admin' element={<AdminDashboard employeeData={employeeData} setEmployeeData={setEmployeeData}/>}/>
-      <Route path="/employee/:id" element={<ViewEmployee employeeData={employeeData} setEmployeeData={setEmployeeData} />} />
-    </Routes>
-  </Router>
-  </>
+    <>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Login setIsAuthenticated={setIsAuthenticated} />}
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <AdminDashboard
+                  employeeData={employeeData}
+                  setEmployeeData={setEmployeeData}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/employee/:id"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ViewEmployee
+                  employeeData={employeeData}
+                  setEmployeeData={setEmployeeData}
+                />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
