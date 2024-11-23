@@ -9,7 +9,7 @@ const AdminDashboard = () => {
      <Header/>
      <div className="employee-details">
         <h2>Employee Detail Table </h2>
-        <div className="emp-table">
+        <div className="emp-list-container">
           <EmpList/>
         </div>
      </div>

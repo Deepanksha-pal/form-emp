@@ -7,16 +7,48 @@ const Login = () => {
         email:"",
         password:""
     })
+    
+    const predefinedUser = {
+      email: "admin@example.com",
+      password: "Admin@123",
+    };
     const navigate=useNavigate()
-    const handleSubmit=(e)=>{
-       e.preventDefault()
-       if (!formData.email || !formData.password) {
+
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      // Validation for empty fields
+      if (!formData.email || !formData.password) {
         alert("Please fill in all fields.");
         return;
       }
-    console.log("login successfully",formData)
-    navigate("/admin")
-    }
+      
+      if (formData.email !== predefinedUser.email) {
+        alert("Incorrect User ID.");
+        return;
+      }
+  
+      // Password validation regex
+      const passwordRegex =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+  
+      if (!passwordRegex.test(formData.password)) {
+        alert("Incorrect password");
+        return;
+      }
+  
+      // Check if credentials match the predefined user
+      if (
+        formData.email === predefinedUser.email &&
+        formData.password === predefinedUser.password
+      ) {
+        console.log("Login successful", formData);
+        navigate("/admin");
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    };
 
     const handleChange=(e)=>{
         const {name,value}=e.target

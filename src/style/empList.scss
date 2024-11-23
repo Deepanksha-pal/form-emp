@@ -1,17 +1,53 @@
 .emp-list{
-    width: 100%;
-    padding: 2px auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    
-
-    >.list-item{
-        width: 100%;
-      background-color: red;
-      padding: 1rem;
-      border: 1px solid #333;
+  
+   >ul{
+      width: 100%;
+      padding: 2px auto;
+      height: auto;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      list-style: none;
+      gap: 1rem;
+
+      >.list-item{
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #333;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px;
+        background-color:#f6f2f281;
+
+        >span{
+          font-size: 1.1rem;
+          font-weight: 600;
+        }
+        >.button-container{
+          display: flex;
+          gap: 1rem;
+          button{
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color:rgba(0, 0, 255, 0.53) ;
+            // background-image: linear-gradient(to right, rgba(0, 0, 255, 0.53),rgba(128, 0, 128, 0.57));
+            &:hover {
+              background-color: #0056b3;
+         
+            }
+          }
+          .delete{
+             background-color:  #ff4b5c;
+
+             &:hover{
+              background-color: #ff4b5da2;
+             }
+          }
+        }
+      }
     }
+ 
+
+   
 }
