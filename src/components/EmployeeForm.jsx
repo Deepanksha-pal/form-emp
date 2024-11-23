@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import "../style/employeeForm.scss";
+import { useNavigate } from 'react-router-dom';
 
 const EmployeeForm = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -47,6 +49,8 @@ const EmployeeForm = () => {
         image: "",
         idProof: "",
       })
+
+      navigate("/")
   };
 
   return (

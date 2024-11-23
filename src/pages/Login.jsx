@@ -61,12 +61,16 @@ const Login = ({ setIsAuthenticated }) => {
        ))
        
     }
+
+    const handleregistration=()=>{
+      navigate("/employeeform")
+    }
    
   return (
     <div className="divcenter">
     <div className="login-container">
     <form onSubmit={handleSubmit} className="login-form">
-      <h2>Login</h2>
+      <h2>Admin Login</h2>
       <div className="input-form">
         <label>Email ID:</label>
         <input
@@ -91,6 +95,10 @@ const Login = ({ setIsAuthenticated }) => {
       </div>
       <button type="submit">Login</button>
     </form>
+    <div className='registration-btn'>
+      <p>Employee Registration Form</p>
+      <button onClick={handleregistration}>click here</button>
+    </div>
   </div>
   </div>
   )

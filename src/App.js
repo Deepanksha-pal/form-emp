@@ -5,6 +5,7 @@ import AdminDashboard from './components/AdminDashboard';
 import { empData } from './assets/data';
 import { useState } from 'react';
 import ViewEmployee from './components/ViewEmployee';
+import EmployeeForm from "./components/EmployeeForm";
 
 function ProtectedRoute({ isAuthenticated, children }) {
   return isAuthenticated ? children : <Navigate to="/" />;
@@ -43,6 +44,10 @@ function App() {
                 />
               </ProtectedRoute>
             }
+          />
+          <Route
+            path="/employeeform"
+            element={<EmployeeForm/>}
           />
         </Routes>
       </Router>
