@@ -12,7 +12,7 @@ export  const empData=[
         "guardianName": "Jane Doe",
         "relationship": "Mother",
         "guardianNumber": "1122334455",
-        "image": "path/to/image1.jpg",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqiZenuQQmqJBltmWA5g7ftw-VL3jp90yc6g&s",
         "idProof": "path/to/idProof1.jpg"
     },
     {
@@ -28,7 +28,7 @@ export  const empData=[
         "guardianName": "Bob Smith",
         "relationship": "Father",
         "guardianNumber": "7788990011",
-        "image": "path/to/image2.jpg",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqiZenuQQmqJBltmWA5g7ftw-VL3jp90yc6g&s",
         "idProof": "path/to/idProof2.jpg"
     },
     {
