@@ -1,53 +1,68 @@
-.emp-list{
-  
-   >ul{
-      width: 100%;
-      padding: 2px auto;
-      height: auto;
+.emp-list {
+  display: flex;
+  justify-content: center;
+
+  > ul {
+    width: 50%;
+    padding: 2px auto;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 1rem;
+
+    > .list-item {
       display: flex;
-      flex-direction: column;
-      list-style: none;
-      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background-color: #f6f2f281;
 
-      >.list-item{
-        width: 100%;
-        padding: 1rem;
-        border: 1px solid #333;
+      > .info-container {
         display: flex;
-        justify-content: space-between;
-        border-radius: 5px;
-        background-color:#f6f2f281;
+        align-items: center;
+        gap: 1rem;
 
-        >span{
+        > .circle-image {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 2px solid #ccc;
+        }
+
+        > p {
           font-size: 1.1rem;
           font-weight: 600;
+          margin: 0;
         }
-        >.button-container{
-          display: flex;
-          gap: 1rem;
-          button{
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            background-color:rgba(0, 0, 255, 0.53) ;
-            // background-image: linear-gradient(to right, rgba(0, 0, 255, 0.53),rgba(128, 0, 128, 0.57));
-            &:hover {
-              background-color: #0056b3;
-         
-            }
-          }
-          .delete{
-             background-color:  #ff4b5c;
+      }
 
-             &:hover{
-              background-color: #ff4b5da2;
-             }
+      > .button-container {
+        display: flex;
+        gap: 1rem;
+
+        button {
+          padding: 5px 10px;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          background-color: rgba(0, 0, 255, 0.53);
+
+          &:hover {
+            background-color: #0056b3;
+          }
+        }
+
+        .delete {
+          background-color: #ff4b5c;
+
+          &:hover {
+            background-color: #ff4b5da2;
           }
         }
       }
     }
- 
-
-   
+  }
 }
