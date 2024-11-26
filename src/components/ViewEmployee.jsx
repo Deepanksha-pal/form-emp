@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate    } from "react-router-dom";
-import "../style/viewEmployee.scss";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ViewEmployee = ({ employeeData, setEmployeeData }) => {
   const [employee, setEmployee] = useState({});
@@ -8,7 +7,7 @@ const ViewEmployee = ({ employeeData, setEmployeeData }) => {
   const [modalImage, setModalImage] = useState("");
 
   const { id } = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const newEmployee = employeeData.find((emp) => emp.id.toString() === id);
@@ -26,91 +25,96 @@ const ViewEmployee = ({ employeeData, setEmployeeData }) => {
   };
 
   if (!employee) {
-    return <div>Employee not found</div>;
+    return <div className="text-center text-xl text-red-500">Employee not found</div>;
   }
 
   return (
-    <div className="employee-detail">
-      <h2>Employee Details</h2>
-      <button className="back-button" onClick={() => navigate("/admin")}>
+    <div className="max-w-4xl mx-auto p-6 bg-green-50 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold text-center border-green-500 border-b-2 pb-4 text-gray-800 mb-6">Employee Details</h2>
+      <button
+        className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 mb-4"
+        onClick={() => navigate("/admin")}
+      >
         Back to Admin
       </button>
-      <div className="detail-wrapper">
-      <div className="profile-image-container">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="flex justify-center items-center flex-col">
+          <div className="relative mb-4">
             <img
               src={employee.image}
               alt={employee.fullName}
-              className="profile-image"
+              className="w-48 h-48 object-cover rounded-full border-4 border-green-600"
             />
             <button
-              className="view-button"
+              className="absolute bottom-2 right-2 bg-green-600 text-white py-1 px-2 rounded-full shadow-md hover:bg-green-700"
               onClick={() => openModal(employee.image)}
             >
               View Profile Image
             </button>
           </div>
           {isModalOpen && (
-            <div className="modal" onClick={closeModal}>
-              <div
-                className="modal-content"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img src={modalImage} alt="Employee" className="modal-image" />
-                <button className="close-button" onClick={closeModal}>
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" onClick={closeModal}>
+              <div className="bg-white p-6 rounded-lg shadow-lg relative" onClick={(e) => e.stopPropagation()}>
+                <img src={modalImage} alt="Employee" className="w-full h-auto rounded-lg" />
+                <button
+                  className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full"
+                  onClick={closeModal}
+                >
                   Close
                 </button>
               </div>
             </div>
           )}
-        <div className="detail-container">
-          <div className="detail-item">
-            <span className="key">Full Name:</span>
-            <span className="value">{employee.fullName}</span>
+        </div>
+        <div className="space-y-4">
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Full Name:</span>
+            <span className="text-gray-700">{employee.fullName}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Email:</span>
-            <span className="value">{employee.email}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Email:</span>
+            <span className="text-gray-700">{employee.email}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Phone Number:</span>
-            <span className="value">{employee.phoneNumber}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Phone Number:</span>
+            <span className="text-gray-700">{employee.phoneNumber}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Alternate Number:</span>
-            <span className="value">{employee.alternateNumber}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Alternate Number:</span>
+            <span className="text-gray-700">{employee.alternateNumber}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Date of Birth:</span>
-            <span className="value">{employee.dob}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Date of Birth:</span>
+            <span className="text-gray-700">{employee.dob}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Gender:</span>
-            <span className="value">{employee.gender}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Gender:</span>
+            <span className="text-gray-700">{employee.gender}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Guardian Name:</span>
-            <span className="value">{employee.guardianName}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Guardian Name:</span>
+            <span className="text-gray-700">{employee.guardianName}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Guardian Number:</span>
-            <span className="value">{employee.guardianNumber}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Guardian Number:</span>
+            <span className="text-gray-700">{employee.guardianNumber}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Relationship:</span>
-            <span className="value">{employee.relationship}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Relationship:</span>
+            <span className="text-gray-700">{employee.relationship}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Permanent Address:</span>
-            <span className="value">{employee.permanentAddress}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Permanent Address:</span>
+            <span className="text-gray-700">{employee.permanentAddress}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">Residential Address:</span>
-            <span className="value">{employee.residentialAddress}</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">Residential Address:</span>
+            <span className="text-gray-700">{employee.residentialAddress}</span>
           </div>
-          <div className="detail-item">
-            <span className="key">ID Proof:</span>
+          <div className="flex">
+            <span className="font-semibold text-green-800 w-40">ID Proof:</span>
             <button
-              className="view-button"
+              className="bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700"
               onClick={() => openModal(employee.idProof)}
             >
               View
