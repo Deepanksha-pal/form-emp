@@ -18,6 +18,7 @@ const EmployeeForm = () => {
     guardianNumber: '',
     image: null,
     idProof: null,
+    token:""
   });
 
   const handleInputChange = (e) => {
@@ -48,6 +49,7 @@ const EmployeeForm = () => {
         guardianNumber: '',
         image: "",
         idProof: "",
+        token:""
       })
 
       navigate("/")
@@ -58,6 +60,16 @@ const EmployeeForm = () => {
     <div className="employee-form">
     <h2 className='emp-heading'>Empoyee Form</h2>
     <form className="form-container" onSubmit={handleSubmit}>
+      <div className="input-form">
+        <label>Employee Token: </label>
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Enter Your Token"
+          value={formData.token}
+          onChange={handleInputChange}
+        />
+      </div>
       <div className="input-form">
         <label>Full Name: </label>
         <input
