@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import "../style/employeeForm.scss";
+// import "../style/employeeForm.scss";
 import { useNavigate,Link } from "react-router-dom";
+import Loader from "./Loader";
 
 const EmployeeForm = () => {
   const navigate = useNavigate();
+  const [isLoading,setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -11,13 +13,13 @@ const EmployeeForm = () => {
     gender: "",
     phoneNumber: "",
     alternateNumber: "",
-    residentialAddress: "",
+    currentAddress: "",
     permanentAddress: "",
     guardianName: "",
     relationship: "",
     guardianNumber: "",
-    image: null,
-    idProof: null,
+    image: "",
+    idProof: "",
     token: "",
   });
 
@@ -31,10 +33,44 @@ const EmployeeForm = () => {
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    alert("Form submitted successfully...");
+    setIsLoading(true)
+
+    const data = {
+      full_name:formData.fullName,
+      email:formData.email,
+      mobile:formData.phoneNumber,
+      alternate_mobile:formData.alternateNumber,
+      gender:formData.gender,
+      address:formData.currentAddress,
+      guardian_name:formData.guardianName,
+      relation:formData.relationship,
+      guardian_mobile:formData.guardianNumber,
+      p_address:formData.permanentAddress,
+      image:formData.image,
+      id_prove:formData.idProof,
+      dob:formData.dob,
+      token:formData.token
+    }
+
+    console.log(data,"line 57")
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/employees",{
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        method:"POST",
+        body:JSON.stringify(data)
+      })
+      console.log(response,"ghsfghsh")
+      if(!response.ok){
+        throw new Error("Form submission failed")
+      } 
+      const result= await response.json()
+      console.log(result,"form data")
+      alert("Form submitted successfully!");
+      
     setFormData({
       fullName: "",
       email: "",
@@ -42,7 +78,7 @@ const EmployeeForm = () => {
       gender: "",
       phoneNumber: "",
       alternateNumber: "",
-      residentialAddress: "",
+      currentAddress: "",
       permanentAddress: "",
       guardianName: "",
       relationship: "",
@@ -53,7 +89,91 @@ const EmployeeForm = () => {
     });
 
     navigate("/");
+
+    } catch (error) {
+      alert('Failed to submit form. Please try again.');
+    }finally{
+     setIsLoading(false)
+    }
+    
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   // Create FormData object
+  //   const formDataObj = new FormData();
+  //   formDataObj.append("full_name", formData.fullName);
+  //   formDataObj.append("email", formData.email);
+  //   formDataObj.append("mobile", formData.phoneNumber);
+  //   formDataObj.append("alternate_mobile", formData.alternateNumber);
+  //   formDataObj.append("gender", formData.gender);
+  //   formDataObj.append("address", formData.currentAddress);
+  //   formDataObj.append("guardian_name", formData.guardianName);
+  //   formDataObj.append("relation", formData.relationship);
+  //   formDataObj.append("guardian_mobile", formData.guardianNumber);
+  //   formDataObj.append("p_address", formData.permanentAddress);
+  //   formDataObj.append("dob", formData.dob);
+  //   formDataObj.append("token", formData.token);
+
+  //   // Append files only if they are selected
+  //   if (formData.image) {
+  //     formDataObj.append("image", formData.image);
+  //   }
+  //   if (formData.idProof) {
+  //     formDataObj.append("id_prove", formData.idProof);
+  //   }
+
+  //   try {
+  //     const response = await fetch("http://127.0.0.1:8000/api/employees", {
+  //       method: "POST",
+  //       body: formDataObj, // Using FormData object
+  //     });
+
+  //     console.log(response);
+
+  //     if (!response.ok) {
+  //       throw new Error("Form submission failed");
+  //     }
+
+  //     const result = await response.json();
+  //     console.log(result, "form data");
+  //     alert("Form submitted successfully!");
+
+  //     // Reset the form fields
+  //     setFormData({
+  //       fullName: "",
+  //       email: "",
+  //       dob: "",
+  //       gender: "",
+  //       phoneNumber: "",
+  //       alternateNumber: "",
+  //       currentAddress: "",
+  //       permanentAddress: "",
+  //       guardianName: "",
+  //       relationship: "",
+  //       guardianNumber: "",
+  //       image: "",
+  //       idProof: "",
+  //       token: "",
+  //     });
+
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Failed to submit form. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  if(isLoading){
+    return(
+      <>
+      <Loader/>
+      </>
+    )
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-green-50 py-8 px-4 sm:px-6 lg:px-8">
@@ -178,16 +298,16 @@ const EmployeeForm = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                htmlFor="residentialAddress"
+                htmlFor="currentAddress"
                 className="block text-sm font-medium text-gray-600"
               >
                 Residential Address
               </label>
               <textarea
-                name="residentialAddress"
+                name="currentAddress"
                 rows="4"
                 placeholder="Enter Residential Address"
-                value={formData.residentialAddress}
+                value={formData.currentAddress}
                 onChange={handleInputChange}
                 className="mt-1 block w-full px-4 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               />
@@ -255,7 +375,7 @@ const EmployeeForm = () => {
             <input
               type="file"
               name="image"
-              accept="image/*"
+              accept=".webp,.jpg,.png"
               onChange={handleFileChange}
               className="mt-1 block w-full px-4 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
@@ -265,18 +385,16 @@ const EmployeeForm = () => {
             <label
               htmlFor="idProof"
               className="block text-sm font-medium text-gray-600"
-            >
-              Upload Your ID Proof
+            >Upload Your ID Proof
             </label>
             <input
               type="file"
               name="idProof"
-              accept=".pdf,.jpg,.png"
+              accept=".pdf"
               onChange={handleFileChange}
               className="mt-1 block w-full px-4 py-2 border border-green-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-
           <div>
             <label
               htmlFor="token"

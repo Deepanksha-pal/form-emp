@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 const EmpList = ({ employeeData, setEmployeeData }) => {
+  const [empData, setEmpData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Loader state
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   const handleView = (item) => {
@@ -13,18 +18,63 @@ const EmpList = ({ employeeData, setEmployeeData }) => {
     setEmployeeData(newEmpList);
   };
 
+  const fetchData = async()=>{
+    try {
+      setIsLoading(true);
+      setError(null)
+      const response =await fetch("http://127.0.0.1:8000/api/getemployees")
+      if(!response.ok){
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+      const result = await response.json()
+      console.log(result,"line 30")
+      if(result){
+        setEmpData(result.data)
+        console.log(empData,"data from line 32")
+      }
+  
+    } catch (error) {
+      setError(error.message)
+    }finally{
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(()=>{
+    fetchData()
+    console.log("object")
+    console.log(empData,"line 40")
+  },[])
+
+
+
+
+  if(isLoading){
+    return(
+      <>
+        <Loader/>
+      </>
+    )
+  }
+
+  if(error){
+    return(
+     <div className="text-bold text-red">Error: {error}</div>
+    )
+  }
+
   return (
-    <div className="emp-list bg-green-50 p-6 rounded-lg shadow-md">
+    <div className="emp-list bg-green-50 p-6 rounded-lg shadow-md w-[70%]">
       <ul>
-        {employeeData?.map((emp) => (
+        {empData?.map((emp) => (
           <li className="bg-white rounded-xl shadow-sm mb-4 p-4 flex justify-between items-center" key={emp.id}>
             <div className="info-container flex items-center space-x-4">
               <img
                 className="circle-image w-12 h-12 rounded-full border-2 border-green-500"
                 src={emp.image}
-                alt={emp.fullName}
+                alt={emp.full_name}
               />
-              <p className="text-lg font-semibold text-green-700">{emp.fullName}</p>
+              <p className="text-lg font-semibold text-green-700">{emp.full_name}</p>
             </div>
             <div className="button-container flex space-x-4">
               <button
@@ -44,6 +94,7 @@ const EmpList = ({ employeeData, setEmployeeData }) => {
         ))}
       </ul>
     </div>
+    
   );
 };
 
